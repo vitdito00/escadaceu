@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escada para o Céu | CLJ Capela Santa Luzia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --blue-dark: #1E3A8A;
+            --blue-light: #3B82F6;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #F8FAFC;
+            color: #1F2937;
+            scroll-behavior: smooth;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+            position: relative;
+            overflow: hidden;
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cloud {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.8;
+            animation: moveCloud linear infinite;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        
+        @keyframes moveCloud {
+            from { transform: translateX(100vw); }
+            to { transform: translateX(-100%); }
+        }
+        
+        .quote {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
+        .gold-text {
+            color: var(--gold);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .gold-border {
+            border: 2px solid var(--gold);
+        }
+        
+        .ranking-bg {
+            background-image: url('https://i.imgur.com/EEfMw8m.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+        
+        .ranking-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .podium {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .podium-place {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .podium-place:hover {
+            transform: translateY(-5px);
+        }
+        
+        .podium-1 {
+            height: 180px;
+            background: linear-gradient(to bottom, #FFD700, #D4AF37);
+            width: 100px;
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .podium-2 {
+            height: 140px;
+            background: linear-gradient(to bottom, #C0C0C0, #A8A8A8);
+            width: 100px;
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .podium-3 {
+            height: 100px;
+            background: linear-gradient(to bottom, #CD7F32, #A67C52);
+            width: 100px;
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .podium-number {
+            position: absolute;
+            top: -30px;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .card {
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .game-container {
+            position: relative;
+            width: 100;
+            height: 400px;
+            overflow: hidden;
+            margin-top: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .game-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.imgur.com/xyZrQ1f.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .character {
+            position: absolute;
+            bottom: 100px;
+            left: 50px;
+            width: 80px;
+            height: 120px;
+            background-image: url('https://i.imgur.com/0eI6eFU.gif');
+            background-size: contain;
+            background-repeat: no-repeat;
+            transition: left 0.5s linear;
+            z-index: 10;
+        }
+        
+        .goal {
+            position: absolute;
+            bottom: 150px;
+            right: 50px;
+            width: 120px;
+            height: 144px;
+            background-image: url('https://i.imgur.com/TNTfoW5.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 10;
+        }
+        
+        .pixel-modal {
+            font-family: 'Press Start 2P', cursive;
+            background-color: #fff;
+            border: 4px solid #000;
+            border-radius: 0;
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.2);
+        }
+        
+        .pixel-btn {
+            font-family: 'Press Start 2P', cursive;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 0;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+            transition: all 0.1s;
+        }
+        
+        .pixel-btn:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+        }
+        
+        .pixel-btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0 0 0 rgba(0,0,0,0.2);
+        }
+        
+        .admin-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        
+        .modal {
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .move-btn {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            width: 100px;
+            height: 100px;
+            background-image: url('https://i.imgur.com/TOSjrGN.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .move-btn:active {
+            transform: translateX(-50%) scale(0.95);
+        }
+        
+        .start-game-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 15;
+        }
+        
+        .points-explanation {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .points-explanation h3 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #1E3A8A;
+        }
+        
+        .points-explanation ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        
+        .points-explanation li {
+            margin-bottom: 5px;
+        }
+        
+        .header-image {
+            max-width: 800px;
+            width: 90%;
+            height: auto;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+        
+        .header-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .custom-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin: 20px auto;
+            display: block;
+        }
+        
+        .image-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .image-edit-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .image-container:hover .image-edit-btn {
+            opacity: 1;
+        }
+        
+        .image-edit-modal {
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Floating Clouds -->
+    <div id="clouds-container"></div>
+
+    <!-- Hero Section -->
+    <section class="hero py-12 md:py-20 relative">
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <img src="https://i.imgur.com/MsT4PXq.png" 
+                 alt="Escada para o Céu" 
+                 class="header-image mx-auto">
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <!-- Ranking Section -->
+        <section class="ranking-bg py-16 relative">
+            <div class="container mx-auto px-4 relative z-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 gold-text">Ranking</h2>
+                
+                <!-- Podium -->
+                <div class="podium mb-8" id="podium">
+                    <!-- Podium will be filled by JavaScript -->
+                </div>
+                
+                <div class="bg-white bg-opacity-90 p-6 md:p-8 rounded-xl shadow-lg gold-border">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full">
+                            <thead>
+                                <tr class="bg-blue-600 text-white">
+                                    <th class="py-3 px-4 text-left rounded-tl-lg">Posição</th>
+                                    <th class="py-3 px-4 text-left">Nome</th>
+                                    <th class="py-3 px-4 text-left rounded-tr-lg">Pontuação</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ranking-table">
+                                <!-- Ranking data will be inserted here by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Custom Image Below Ranking -->
+                <div class="image-container mt-12" id="custom-image-container">
+                    <img src="https://i.imgur.com/AbYIU11.png" alt="Imagem personalizada" class="custom-image" id="custom-image">
+                    <button class="image-edit-btn hidden" id="image-edit-btn">✏️</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Explanation Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-blue-800">Projeto Escada para o Céu</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
+                    <div class="card p-6">
+                        <div class="text-4xl mb-4 text-blue-600">⛅</div>
+                        <h3 class="text-xl font-bold mb-4 text-blue-600">O céu nos espera desde sempre!</h3>
+                        <p class="text-gray-700">O projeto "Escada Para o Céu" tem como missão relembrar a importância da Santa Missa, onde o sacrifício de Cristo é renovado todos os dias, do nascer ao pôr do sol.</p>
+                    </div>
+                    
+                    <!-- Card 2 -->
+                    <div class="card p-6">
+                        <div class="text-4xl mb-4 text-blue-600">🫀</div>
+                        <h3 class="text-xl font-bold mb-4 text-blue-600">Jesus Vive!</h3>
+                        <p class="text-gray-700">Após a consagração do pão e do vinho, já não são mais pão e vinho no altar, mas o Corpo, o Sangue, a Alma e a Divindade de Jesus Cristo.</p>
+                    </div>
+                    
+                    <!-- Card 3 -->
+                    <div class="card p-6">
+                        <div class="text-4xl mb-4 text-blue-600">🥇</div>
+                        <h3 class="text-xl font-bold mb-4 text-blue-600">Como Participar</h3>
+                        <p class="text-gray-700">Participe das missas e atividades do grupo para acumular pontos e subir no ranking. Quanto mais você se aproxima da Eucaristia, mais próximo está del Céu!</p>
+                    </div>
+                </div>
+                
+                <!-- Points Explanation Section -->
+                <div class="points-explanation mt-12">
+                    <h3 class="text-2xl font-bold text-center mb-6 text-blue-800">Sistema de Pontuação</h3>
+                    <div class="grid grid-cols-1 gap-8">
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3 text-blue-700">Missas</h4>
+                            <ul class="text-gray-700 space-y-2">
+                                <li>Missa semanal: <span class="font-bold">1 ponto</span></li>
+                                <li>Missa dominical: <span class="font-bold">2 pontos</span></li>
+                                <li>Missa do Grupo: <span class="font-bold">3 pontos</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Carlo Acutis Game Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-blue-800">Jogo de Carlo Acutis</h2>
+                
+                <div class="game-container">
+                    <div class="game-bg"></div>
+                    <div class="character" id="character"></div>
+                    <div class="goal" id="goal"></div>
+                    
+                    <!-- Move button -->
+                    <button id="move-btn" class="move-btn hidden"></button>
+                    
+                    <!-- Start game overlay -->
+                    <div id="start-game-overlay" class="start-game-overlay">
+                        <h3 class="text-xl md:text-2xl font-bold mb-6 text-blue-800">Ajude Carlo a chegar até a Eucaristia</h3>
+                        <button id="start-game-btn" class="bg-green-600 hover:bg-green-7 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105">
+                            Começar Jogo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-4">Projeto Escada para o Céu | CLJ Capela Santa Luzia</p>
+            <p class="text-sm opacity-80">"Quanto mais próximos estivermos da Eucaristia, mais próximos estaremos do Céu!"</p>
+        </div>
+    </footer>
+
+    <!-- Admin Login Button -->
+    <button id="admin-btn" class="admin-btn bg-blue-600 hover:bg-blue-7 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-all duration-300">
+        Acesso Admin
+    </button>
+
+    <!-- Admin Login Modal -->
+    <div id="admin-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden modal">
+        <div class="bg-white p-8 rounded-lg w-full max-w-md">
+            <h3 class="text-2xl font-bold mb-6 text-center">Login Administrativo</h3>
+            <div class="space-y-4">
+                <div>
+                    <label for="username" class="block text-gray-700 mb-2">Usuário</label>
+                    <input type="text" id="username" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="password" class="block text-gray-700 mb-2">Senha</label>
+                    <input type="password" id="password" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="flex justify-between mt-6">
+                    <button id="cancel-login-btn" class="bg-gray-500 hover:bg-gray-6 text-white px-4 py-2 rounded transition-colors duration-300">
+                        Cancelar
+                    </button>
+                    <button id="confirm-login-btn" class="bg-blue-600 hover:bg-blue-7 text-white px-4 py-2 rounded transition-colors duration-300">
+                        Entrar
+                    </button>
+                </div>
+                <p id="login-error" class="text-red-500 text-center hidden">Usuário ou senha incorretos!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div id="admin-panel" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden modal">
+        <div class="bg-white p-8 rounded-lg w-full max-w-4xl max-h-screen overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold">Painel Administrativo</h3>
+                <button id="logout-btn" class="bg-red-500 hover:bg-red-6 text-white px-4 py-2 rounded transition-colors duration-300">
+                    Sair
+                </button>
+            </div>
+            
+            <div class="mb-6">
+                <div class="flex justify-between mb-4">
+                    <h4 class="text-xl font-semibold">Editar Ranking</h4>
+                    <button id="add-row-btn" class="bg-green-500 hover:bg-green-6 text-white px-3 py-1 rounded transition-colors duration-300">
+                        + Adicionar
+                    </button>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full border">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="py-2 px-4 border">Nome</th>
+                                <th class="py-2 px-4 border">Pontuação</th>
+                                <th class="py-2 px-4 border">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-table">
+                            <!-- Admin table data will be inserted here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="mb-6">
+                <h4 class="text-xl font-semibold mb-4">Editar Imagem Personalizada</h4>
+                <div class="bg-gray-100 p-4 rounded-lg">
+                    <div class="mb-4">
+                        <label for="image-url" class="block text-gray-700 mb-2">URL da Imagem</label>
+                        <input type="text" id="image-url" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" value="https://i.imgur.com/AbYIU11.png">
+                    </div>
+                    <button id="update-image-btn" class="bg-blue-600 hover:bg-blue-7 text-white px-4 py-2 rounded transition-colors duration-300">
+                        Atualizar Imagem
+                    </button>
+                </div>
+            </div>
+            
+            <div class="flex justify-end">
+                <button id="save-changes-btn" class="bg-blue-600 hover:bg-blue-7 text-white px-6 py-2 rounded transition-colors duration-300">
+                    Salvar Alterações
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Edit Modal -->
+    <div id="image-edit-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden modal">
+        <div class="bg-white p-8 rounded-lg image-edit-modal">
+            <h3 class="text-xl font-bold mb-6 text-center">Editar Imagem</h3>
+            <div class="mb-4">
+                <label for="edit-image-url" class="block text-gray-700 mb-2">URL da Imagem</label>
+                <input type="text" id="edit-image-url" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="flex justify-between">
+                <button id="cancel-image-edit-btn" class="bg-gray-500 hover:bg-gray-6 text-white px-4 py-2 rounded transition-colors duration-300">
+                    Cancelar
+                </button>
+                <button id="confirm-image-edit-btn" class="bg-blue-600 hover:bg-blue-7 text-white px-4 py-2 rounded transition-colors duration-300">
+                    Confirmar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Success Modal -->
+    <div id="game-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden modal">
+        <div class="p-8 bg-white rounded-lg pixel-modal max-w-md">
+            <h3 class="text-xl font-bold mb-4 text-center">Graças e Louvores sejam dados a todo momento ao Santíssimo e Diviníssimo Sacramento</h3>
+            <p class="mb-6 text-center">Quanto mais próximo estivermos da Eucaristia, mais próximos estaremos do Céu!</p>
+            <div class="text-center">
+                <button id="restart-game-btn" class="pixel-btn">O Céu nos espera desde Sempre!</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cloud animation
+        function createClouds() {
+            const container = document.getElementById('clouds-container');
+            const cloudCount = 8;
+            
+            for (let i = 0; i < cloudCount; i++) {
+                const cloud = document.createElement('img');
+                cloud.src = 'https://i.imgur.com/TbUXWLs.png';
+                cloud.className = 'cloud';
+                
+                // Random size
+                const size = Math.random() * 150 + 100;
+                cloud.style.width = `${size}px`;
+                
+                // Random position
+                const top = Math.random() * 80;
+                cloud.style.top = `${top}%`;
+                
+                // Random speed
+                const duration = Math.random() * 60 + 60;
+                cloud.style.animationDuration = `${duration}s`;
+                
+                // Random delay
+                const delay = Math.random() * -duration;
+                cloud.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(cloud);
+            }
+        }
+        
+        // Database simulation (in a real app, this would be a backend API)
+        const Database = {
+            // Default data
+            defaultData: {
+                ranking: [
+                    { name: "Vitor L", points: 64 },
+                    { name: "Beatriz", points: 51 },
+                    { name: "Laura", points: 43 },
+                    { name: "Raíssa", points: 40 },
+                    { name: "Vitor G", points: 39 },
+                    { name: "Maria Clara", points: 36 },
+                    { name: "Gabriel Dalpian", points: 35 },
+                    { name: "Patrick", points: 35 },
+                    { name: "Maria Fritzen", points: 32 },
+                    { name: "Jacqueline", points: 31 },
+                    { name: "Ana Luiza", points: 29 },
+                    { name: "Luana", points: 27 },
+                    { name: "Anna", points: 23 },
+                    { name: "Arthur", points: 22 },
+                    { name: "Elisie", points: 22 },
+                    { name: "Pedro", points: 19 },
+                    { name: "Gabriel Santos", points: 18 },
+                    { name: "Mario", points: 18 },
+                    { name: "Moisés", points: 17 },
+                    { name: "Natália", points: 17 },
+                    { name: "Rafael", points: 17 },
+                    { name: "Gustavo", points: 16 },
+                    { name: "Henderson", points: 16 },
+                    { name: "Sophia", points: 16 },
+                    { name: "Amanda", points: 15 },
+                    { name: "Eduarda Costa", points: 15 },
+                    { name: "Maria Vargas", points: 15 },
+                    { name: "Murilo", points: 14 },
+                    { name: "Giovanna", points: 13 },
+                    { name: "Isabella", points: 13 },
+                    { name: "Dudinha", points: 12 },
+                    { name: "Thomas", points: 11 },
+                    { name: "João Pedro", points: 10 },
+                    { name: "Kaiane", points: 8 },
+                    { name: "Kauane", points: 8 },
+                    { name: "Luíza", points: 8 },
+                    { name: "Maria Fernanda", points: 8 },
+                    { name: "Carolina", points: 7 },
+                    { name: "Ana Carolina", points: 6 },
+                    { name: "Gabriel Shuster", points: 5 },
+                    { name: "Izabel", points: 4 }
+                ],
+                customImageUrl: "https://i.imgur.com/AbYIU11.png"
+            },
+            
+            // Get data from localStorage or use default
+            getData: function() {
+                const savedData = localStorage.getItem('siteData');
+                return savedData ? JSON.parse(savedData) : this.defaultData;
+            },
+            
+            // Save data to localStorage
+            saveData: function(data) {
+                localStorage.setItem('siteData', JSON.stringify(data));
+                
+                // In a real app, here you would make an API call to save to a real database
+                console.log('Data saved to database:', data);
+            },
+            
+            // Update ranking data
+            updateRanking: function(newRanking) {
+                const data = this.getData();
+                data.ranking = newRanking;
+                this.saveData(data);
+            },
+            
+            // Update custom image URL
+            updateImageUrl: function(newUrl) {
+                const data = this.getData();
+                data.customImageUrl = newUrl;
+                this.saveData(data);
+            }
+        };
+        
+        // Sort ranking by points
+        function sortRanking(ranking) {
+            return [...ranking].sort((a, b) => b.points - a.points);
+        }
+        
+        // Render podium
+        function renderPodium(ranking) {
+            const podium = document.getElementById('podium');
+            podium.innerHTML = '';
+            
+            if (ranking.length >= 3) {
+                podium.innerHTML = `
+                    <div class="podium-place">
+                        <div class="podium-2">
+                            <div class="podium-number">2</div>
+                        </div>
+                        <div class="mt-2 font-bold text-gray-800">${ranking[1].name}</div>
+                        <div class="text-gray-600">${ranking[1].points} pts</div>
+                    </div>
+                    <div class="podium-place">
+                        <div class="podium-1">
+                            <div class="podium-number">1</div>
+                        </div>
+                        <div class="mt-2 font-bold text-gray-800">${ranking[0].name}</div>
+                        <div class="text-gray-600">${ranking[0].points} pts</div>
+                    </div>
+                    <div class="podium-place">
+                        <div class="podium-3">
+                            <div class="podium-number">3</div>
+                        </div>
+                        <div class="mt-2 font-bold text-gray-800">${ranking[2].name}</div>
+                        <div class="text-gray-600">${ranking[2].points} pts</div>
+                    </div>
+                `;
+            }
+        }
+        
+        // Render ranking table
+        function renderRankingTable(ranking) {
+            const table = document.getElementById('ranking-table');
+            table.innerHTML = '';
+            
+            const sortedRanking = sortRanking(ranking);
+            renderPodium(sortedRanking);
+            
+            sortedRanking.forEach((person, index) => {
+                const row = document.createElement('tr');
+                row.className = index % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+                
+                row.innerHTML = `
+                    <td class="py-3 px-4">${index + 1}º</td>
+                    <td class="py-3 px-4">${person.name}</td>
+                    <td class="py-3 px-4">${person.points}</td>
+                `;
+                
+                table.appendChild(row);
+            });
+        }
+        
+        // Render admin table
+        function renderAdminTable(ranking) {
+            const table = document.getElementById('admin-table');
+            table.innerHTML = '';
+            
+            ranking.forEach((person, index) => {
+                const row = document.createElement('tr');
+                row.className = index % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+                
+                row.innerHTML = `
+                    <td class="py-2 px-4 border">
+                        <input type="text" value="${person.name}" class="w-full px-2 py-1 border rounded name-input focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </td>
+                    <td class="py-2 px-4 border">
+                        <input type="number" value="${person.points}" class="w-full px-2 py-1 border rounded points-input focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </td>
+                    <td class="py-2 px-4 border text-center">
+                        <button class="delete-row-btn bg-red-500 hover:bg-red-6 text-white px-2 py-1 rounded transition-colors duration-300">
+                            Remover
+                        </button>
+                    </td>
+                `;
+                
+                table.appendChild(row);
+            });
+        }
+        
+        // Save changes from admin panel
+        function saveChanges() {
+            const nameInputs = document.querySelectorAll('.name-input');
+            const pointsInputs = document.querySelectorAll('.points-input');
+            
+            const newRanking = [];
+            
+            nameInputs.forEach((input, index) => {
+                newRanking.push({
+                    name: input.value,
+                    points: parseInt(pointsInputs[index].value)
+                });
+            });
+            
+            // Update custom image URL
+            const newImageUrl = document.getElementById('image-url').value;
+            Database.updateImageUrl(newImageUrl);
+            
+            // Update ranking in database
+            Database.updateRanking(newRanking);
+            
+            // Refresh the site with new data
+            loadSiteData();
+            
+            hideAdminPanel();
+        }
+        
+        // Add new row to admin table
+        function addNewRow() {
+            const currentRanking = Database.getData().ranking;
+            currentRanking.push({ name: 'Novo Nome', points: 0 });
+            renderAdminTable(currentRanking);
+            
+            // Scroll to bottom
+            const table = document.getElementById('admin-table');
+            table.lastElementChild.scrollIntoView();
+        }
+        
+        // Delete row from admin table
+        function deleteRow(index) {
+            const currentRanking = Database.getData().ranking;
+            currentRanking.splice(index, 1);
+            renderAdminTable(currentRanking);
+        }
+        
+        // Update custom image
+        function updateCustomImage() {
+            const newUrl = document.getElementById('image-url').value;
+            if (newUrl) {
+                Database.updateImageUrl(newUrl);
+                loadSiteData();
+            }
+        }
+        
+        // Load all site data from database
+        function loadSiteData() {
+            const siteData = Database.getData();
+            
+            // Update ranking
+            renderRankingTable(siteData.ranking);
+            
+            // Update custom image
+            document.getElementById('custom-image').src = siteData.customImageUrl;
+            document.getElementById('image-url').value = siteData.customImageUrl;
+            document.getElementById('edit-image-url').value = siteData.customImageUrl;
+        }
+        
+        // Show admin login modal
+        function showAdminLogin() {
+            document.getElementById('admin-modal').classList.remove('hidden');
+        }
+        
+        // Hide admin login modal
+        function hideAdminLogin() {
+            document.getElementById('admin-modal').classList.add('hidden');
+            document.getElementById('login-error').classList.add('hidden');
+        }
+        
+        // Show admin panel
+        function showAdminPanel() {
+            const siteData = Database.getData();
+            renderAdminTable(siteData.ranking);
+            document.getElementById('admin-panel').classList.remove('hidden');
+            document.getElementById('image-url').value = siteData.customImageUrl;
+            
+            // Show edit button
+            document.getElementById('image-edit-btn').classList.remove('hidden');
+        }
+        
+        // Hide admin panel
+        function hideAdminPanel() {
+            document.getElementById('admin-panel').classList.add('hidden');
+        }
+        
+        // Show image edit modal
+        function showImageEditModal() {
+            const siteData = Database.getData();
+            document.getElementById('edit-image-url').value = siteData.customImageUrl;
+            document.getElementById('image-edit-modal').classList.remove('hidden');
+        }
+        
+        // Hide image edit modal
+        function hideImageEditModal() {
+            document.getElementById('image-edit-modal').classList.add('hidden');
+        }
+        
+        // Update image from edit modal
+        function updateImageFromModal() {
+            const newUrl = document.getElementById('edit-image-url').value;
+            if (newUrl) {
+                Database.updateImageUrl(newUrl);
+                loadSiteData();
+            }
+            hideImageEditModal();
+        }
+        
+        // Game variables
+        let gameRunning = false;
+        let characterPosition = 50;
+        const character = document.getElementById('character');
+        const goal = document.getElementById('goal');
+        const gameWidth = document.querySelector('.game-container').offsetWidth;
+        const characterWidth = 80;
+        const goalWidth = 120;
+        const moveBtn = document.getElementById('move-btn');
+        const startGameOverlay = document.getElementById('start-game-overlay');
+        
+        // Initialize game
+        function initGame() {
+            characterPosition = 50;
+            character.style.left = `${characterPosition}px`;
+            character.style.backgroundImage = 'url(https://i.imgur.com/0eI6eFU.gif)';
+            gameRunning = true;
+            
+            // Hide start overlay and show move button
+            startGameOverlay.classList.add('hidden');
+            moveBtn.classList.remove('hidden');
+        }
+        
+        // Move character
+        function moveCharacter() {
+            if (!gameRunning) return;
+            
+            // Change to walking sprite
+            character.style.backgroundImage = 'url(https://i.imgur.com/CZnXwoo.gif)';
+            
+            // Move character right
+            characterPosition = Math.min(characterPosition + 10, gameWidth - characterWidth - 50);
+            character.style.left = `${characterPosition}px`;
+            
+            // Check collision with goal
+            if (characterPosition + characterWidth >= gameWidth - goalWidth - 50) {
+                gameSuccess();
+            }
+            
+            // Return to standing sprite after a delay
+            setTimeout(() => {
+                if (gameRunning) {
+                    character.style.backgroundImage = 'url(https://i.imgur.com/0eI6eFU.gif)';
+                }
+            }, 200);
+        }
+        
+        // Game success
+        function gameSuccess() {
+            gameRunning = false;
+            character.style.backgroundImage = 'url(https://i.imgur.com/pyeClxE.png)';
+            moveBtn.classList.add('hidden');
+            
+            // Wait 2 seconds before showing the modal
+            setTimeout(() => {
+                document.getElementById('game-modal').classList.remove('hidden');
+            }, 2000);
+        }
+        
+        // Restart game
+        function restartGame() {
+            document.getElementById('game-modal').classList.add('hidden');
+            startGameOverlay.classList.remove('hidden');
+            moveBtn.classList.add('hidden');
+            gameRunning = false;
+        }
+        
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            createClouds();
+            loadSiteData();
+            
+            // Show/hide image edit button based on admin status
+            let isAdmin = false;
+            
+            // Admin login
+            document.getElementById('admin-btn').addEventListener('click', showAdminLogin);
+            document.getElementById('cancel-login-btn').addEventListener('click', hideAdminLogin);
+            document.getElementById('confirm-login-btn').addEventListener('click', () => {
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                if (username === 'Lit2025' && password === 'Liturgia25') {
+                    isAdmin = true;
+                    document.getElementById('image-edit-btn').classList.remove('hidden');
+                    hideAdminLogin();
+                    showAdminPanel();
+                } else {
+                    document.getElementById('login-error').classList.remove('hidden');
+                }
+            });
+            
+            // Admin panel
+            document.getElementById('logout-btn').addEventListener('click', () => {
+                isAdmin = false;
+                document.getElementById('image-edit-btn').classList.add('hidden');
+                hideAdminPanel();
+            });
+            document.getElementById('save-changes-btn').addEventListener('click', saveChanges);
+            document.getElementById('add-row-btn').addEventListener('click', addNewRow);
+            document.getElementById('update-image-btn').addEventListener('click', updateCustomImage);
+            
+            // Image edit
+            document.getElementById('image-edit-btn').addEventListener('click', showImageEditModal);
+            document.getElementById('cancel-image-edit-btn').addEventListener('click', hideImageEditModal);
+            document.getElementById('confirm-image-edit-btn').addEventListener('click', updateImageFromModal);
+            
+            // Game controls
+            document.getElementById('start-game-btn').addEventListener('click', initGame);
+            document.getElementById('restart-game-btn').addEventListener('click', restartGame);
+            moveBtn.addEventListener('click', moveCharacter);
+            
+            // Handle delete row buttons (delegated event)
+            document.getElementById('admin-panel').addEventListener('click', (e) => {
+                if (e.target.classList.contains('delete-row-btn')) {
+                    const row = e.target.closest('tr');
+                    const index = Array.from(row.parentNode.children).indexOf(row);
+                    deleteRow(index);
+                }
+            });
+        });
+    </script>
+</html>
